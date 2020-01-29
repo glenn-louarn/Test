@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Morix_Java-v5.1" />
+        <module name="Felix_Java-v0.3.1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Morix_Java-v5.1" target="1.8" />
+      <module name="Felix_Java-v0.3.1" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

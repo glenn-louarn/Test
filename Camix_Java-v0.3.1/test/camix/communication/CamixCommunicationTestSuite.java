@@ -1,4 +1,4 @@
-package carmix.communication;
+package camix.communication;
 
 public class CamixCommunicationTestSuite {
 }

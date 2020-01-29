@@ -2,9 +2,9 @@ package felix.controleur;
 
 import java.io.IOException;
 
-import felix.Felix;
 import felix.communication.Connexion;
 import felix.vue.VueChat;
+import felix.vue.VueConnexion;
 
 /**
  * Classe de contrôleur du chat (architecture MVC). 
@@ -36,21 +36,18 @@ public class ControleurFelix
 	 * Vue chat (permettant d'échanger des messages avec d'autres utilisateurs du chat).
 	 */
 	private VueChat vueChat;
+
+	private VueConnexion vueConnexion;
 	
 	/**
 	 * Constructeur du contrôleur de chat. 
 	 */
 	public ControleurFelix()
 	{
-		try {
-			this.connecteCamix();
-			this.vueChat = new VueChat(this);
-			this.vueChat.affiche();
-			this.vueChat.active();
-		} 
-		catch (IOException ex) {
-			System.err.println(ex.getMessage());
-		}
+		this.vueConnexion = new VueConnexion(this);
+		this.vueChat = new VueChat(this);
+		this.vueConnexion.affiche();
+
 	}
 	
 	/**
@@ -58,12 +55,19 @@ public class ControleurFelix
 	 * 
 	 * @throws IOException erreur d'entrée/sortie.
 	 */
-	private void connecteCamix() throws IOException
+	public void connecteCamix(String ip, String port)
 	{
-		this.connexion = new Connexion(
-			Felix.CONFIGURATION.getString("ADRESSE_CHAT"),
-			Integer.parseInt(Felix.CONFIGURATION.getString("PORT_CHAT"))
-		);
+		try {
+			this.connexion = new Connexion(
+				ip, Integer.parseInt(port)
+			);
+			this.vueConnexion.ferme();
+			this.vueChat.affiche();
+			this.vueChat.active();
+		} catch (IOException e) {
+			this.vueConnexion.setErrorMessage();
+			//e.printStackTrace();
+		}
 	}
 	
 }

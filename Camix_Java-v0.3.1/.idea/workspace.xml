@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3390e2d3-3a1b-4177-b54b-870efbb8ba8a" name="Default Changelist" comment="" />
+    <list default="true" id="f2356b1d-412d-4265-86c5-4b97d3155dd2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="235" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -17,59 +20,81 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1WTRVYj6C7SJEFyFRIfat3Mh59D" />
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WTObSyY7wBwfLuAvbLquMQ59ic" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
-    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Felix_Java-v0.3.1" />
   </component>
-  <component name="RunManager" selected="Application.Camix">
-    <configuration name="Camix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="camix" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Camix Java">
+    <configuration name="Camix Java" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="camix.Camix" />
       <module name="Camix_Java-v0.3.1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="camix.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CanalChatTestEx1EasyMock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CanalChatTestEx1EasyMock.ajouteClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Camix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="carmix.service.*" />
+          <option name="PATTERN" value="camix.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="carmix.service" />
-      <option name="MAIN_CLASS_NAME" value="carmix.service.CanalChatTestEx1EasyMock" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="camix.service" />
+      <option name="MAIN_CLASS_NAME" value="camix.service.CanalChatTestEx1EasyMock" />
+      <option name="METHOD_NAME" value="ajouteClient" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServiceChatTestEx2EasyMock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CanalChatTestEx1Mockito.ajouteClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Camix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="carmix.service.*" />
+          <option name="PATTERN" value="camix.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="carmix.service" />
-      <option name="MAIN_CLASS_NAME" value="carmix.service.ServiceChatTestEx2EasyMock" />
+      <option name="PACKAGE_NAME" value="camix.service" />
+      <option name="MAIN_CLASS_NAME" value="camix.service.CanalChatTestEx1Mockito" />
+      <option name="METHOD_NAME" value="ajouteClient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceChatEasyMock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Camix_Java-v0.3.1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="camix.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="camix.service" />
+      <option name="MAIN_CLASS_NAME" value="camix.service.ServiceChatEasyMock" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -77,9 +102,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Camix" />
-        <item itemvalue="JUnit.ServiceChatTestEx2EasyMock" />
-        <item itemvalue="JUnit.CanalChatTestEx1EasyMock" />
+        <item itemvalue="JUnit.ServiceChatEasyMock" />
+        <item itemvalue="JUnit.CanalChatTestEx1Mockito.ajouteClient" />
+        <item itemvalue="JUnit.CanalChatTestEx1EasyMock.ajouteClient" />
       </list>
     </recent_temporary>
   </component>
@@ -100,34 +125,60 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3390e2d3-3a1b-4177-b54b-870efbb8ba8a" name="Default Changelist" comment="" />
-      <created>1579171622905</created>
+      <changelist id="f2356b1d-412d-4265-86c5-4b97d3155dd2" name="Default Changelist" comment="" />
+      <created>1579170189408</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1579171622905</updated>
+      <updated>1579170189408</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1580282125625">
+    <state x="688" y="56" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579170365341">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="688" y="56" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579170365341" />
+    <state x="746" y="413" width="494" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1579171054035">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="746" y="413" width="494" height="290" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/67.27.1853.1053@67.27.1853.1053" timestamp="1579171054035" />
+    <state x="588" y="189" width="424" height="567" key="FileChooserDialogImpl" timestamp="1580281906639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1580282125625" />
-    <state width="1493" height="172" key="GridCell.Tab.0.bottom" timestamp="1580134568199">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="588" y="189" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1580281906639" />
+    <state x="776" y="269" width="424" height="567" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1579616519247" />
+    <state width="1807" height="327" key="GridCell.Tab.0.bottom" timestamp="1579706104318">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
-    <state width="1493" height="172" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580134568199" />
-    <state width="1493" height="172" key="GridCell.Tab.0.center" timestamp="1580134568199">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1807" height="327" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1579697700966" />
+    <state width="1807" height="327" key="GridCell.Tab.0.bottom/67.27.1853.923@67.27.1853.923" timestamp="1579706104318" />
+    <state width="1807" height="327" key="GridCell.Tab.0.center" timestamp="1579706104317">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
-    <state width="1493" height="172" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580134568199" />
-    <state width="1493" height="172" key="GridCell.Tab.0.left" timestamp="1580134568199">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1807" height="327" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1579697700965" />
+    <state width="1807" height="327" key="GridCell.Tab.0.center/67.27.1853.923@67.27.1853.923" timestamp="1579706104317" />
+    <state width="1807" height="327" key="GridCell.Tab.0.left" timestamp="1579706104316">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
-    <state width="1493" height="172" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580134568199" />
-    <state width="1493" height="172" key="GridCell.Tab.0.right" timestamp="1580134568199">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1807" height="327" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1579697700964" />
+    <state width="1807" height="327" key="GridCell.Tab.0.left/67.27.1853.923@67.27.1853.923" timestamp="1579706104316" />
+    <state width="1807" height="327" key="GridCell.Tab.0.right" timestamp="1579706104318">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
-    <state width="1493" height="172" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580134568199" />
+    <state width="1807" height="327" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1579697700965" />
+    <state width="1807" height="327" key="GridCell.Tab.0.right/67.27.1853.923@67.27.1853.923" timestamp="1579706104318" />
+    <state x="579" y="251" width="819" height="602" key="NewModule_or_Project.wizard" timestamp="1579170405369">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="579" y="251" width="819" height="602" key="NewModule_or_Project.wizard/67.27.1853.1053@67.27.1853.1053" timestamp="1579170405369" />
+    <state x="302" y="153" width="1372" height="798" key="new project wizard" timestamp="1579616524392">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="302" y="153" width="1372" height="798" key="new project wizard/67.27.1853.1053@67.27.1853.1053" timestamp="1579616524392" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Camix_Java_v0_3_1$CanalChatTestEx1EasyMock_ajouteClient.ic" NAME="CanalChatTestEx1EasyMock.ajouteClient Coverage Results" MODIFIED="1579268466001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>camix.service.*</FILTER>
+    </SUITE>
   </component>
 </project>

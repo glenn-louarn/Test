@@ -50,8 +50,7 @@ public final class Camix
 		try {
 			// Création du service.
 			new ServiceChat(
-					Camix.CONFIGURATION.getString("CANAL_PAR_DEFAUT").trim(),
-					Integer.parseInt(Camix.CONFIGURATION.getString("PORT_SERVICE_CHAT").trim()));
+					Camix.CONFIGURATION.getString("CANAL_PAR_DEFAUT").trim()).lanceService(Integer.parseInt(Camix.CONFIGURATION.getString("PORT_SERVICE_CHAT").trim()));
 		}
 		catch (IOException ex) {
 			System.err.println(ex.getMessage());

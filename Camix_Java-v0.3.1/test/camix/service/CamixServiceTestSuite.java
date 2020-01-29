@@ -1,4 +1,4 @@
-package carmix.service;
+package camix.service;
 
 public class CamixServiceTestSuite {
 }

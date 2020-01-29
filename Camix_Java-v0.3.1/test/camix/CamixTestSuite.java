@@ -1,6 +1,5 @@
-package carmix;
+package camix;
 
 
 public class CamixTestSuite {
-    //testGit
 }
