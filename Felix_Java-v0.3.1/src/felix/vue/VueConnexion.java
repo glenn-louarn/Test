@@ -1,26 +1,35 @@
 package felix.vue;
 
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.*;
+import java.text.NumberFormat;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import felix.Felix;
 import felix.controleur.ControleurFelix;
 import felix.controleur.VueFelix;
 
 /**
- * Classe de la vue chat de Felix.
+ * Classe de la vue connexion de Felix.
  *
- * Cette vue permet d'échanger des messages avec d'autres utilisateurs du chat.
+ * Cette vue permet d'initier une connexion au chat.
  *
- * Cette vue est une vue active : elle possède une méthode d'activation qui lance
- * un thread de réception des messages du chat.
+ * Cette vue est une vue active : elle possède une méthode de connexion
+ * qui lance un thread de connexion au chat.
  *
- * @version 0.3.1
+ * @version 4.0
  * @author Matthias Brun
  *
  */
-public class VueConnexion extends VueFelix
+public class VueConnexion extends VueFelix implements ActionListener, Runnable
 {
     /**
      * La fenêtre de la vue.
@@ -32,17 +41,25 @@ public class VueConnexion extends VueFelix
      */
     private Container contenu;
 
-    private JLabel topLabel;
+    /**
+     * Les panneaux de la vue.
+     */
+    private JPanel panIPPort, panInformation, panConnecter;
 
-    private JLabel ipLabel;
+    /**
+     * Les champs texte pour l'adresse IP et les messages d'information de connexion.
+     */
+    private JTextField texteIP, texteInformation;
 
-    private JTextField ipField;
+    /**
+     * Le champs texte formaté du port de la vue.
+     */
+    private JFormattedTextField textePort;
 
-    private JLabel portLabel;
-
-    private JTextField portField;
-
-    private JButton connectButton;
+    /**
+     * Le bouton connecter de la vue.
+     */
+    private JButton boutonConnecter;
 
     /**
      * Constructeur de la vue chat.
@@ -53,10 +70,10 @@ public class VueConnexion extends VueFelix
     {
         super(controleur);
 
-        final Integer largeur = Integer.parseInt(Felix.IHM.getString("FENETRE_CHAT_LARGEUR"));
-        final Integer hauteur = Integer.parseInt(Felix.IHM.getString("FENETRE_CHAT_HAUTEUR"));
+        final Integer largeur = Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_LARGEUR"));
+        final Integer hauteur = Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_HAUTEUR"));
 
-        this.fenetre = new Fenetre(largeur, hauteur, Felix.IHM.getString("FENETRE_CHAT_TITRE"));
+        this.fenetre = new Fenetre(largeur, hauteur, Felix.IHM.getString("FENETRE_CONNEXION_TITRE"));
 
         this.construireFenetre(largeur, hauteur);
     }
@@ -69,40 +86,137 @@ public class VueConnexion extends VueFelix
      */
     private void construireFenetre(Integer largeur, Integer hauteur)
     {
-        this.contenu = this.fenetre.getContentPane();
-        this.contenu.setLayout(new FlowLayout(1, 5, 30));
-
-        this.topLabel = new JLabel("Saisir l'adresse et le port du serveur chat.");
-
-        this.ipLabel = new JLabel("IP");
-        this.ipField = new JTextField(Felix.CONFIGURATION.getString("ADRESSE_CHAT"));
-
-        this.ipLabel.setPreferredSize(new Dimension(largeur/2 - 10, ipLabel.getPreferredSize().height));
-        this.ipField.setPreferredSize(new Dimension(largeur/2 - 10, ipField.getPreferredSize().height));
-
-        this.portLabel = new JLabel("PORT");
-        this.portField = new JTextField(Felix.CONFIGURATION.getString("PORT_CHAT"));
-
-        this.portLabel.setPreferredSize(new Dimension(largeur/2 - 10, portLabel.getPreferredSize().height));
-        this.portField.setPreferredSize(new Dimension(largeur/2 - 10, portField.getPreferredSize().height));
-
-        this.connectButton = new JButton("Connexion");
-
-        this.connectButton.addActionListener(actionEvent -> {
-            this.topLabel.setText("Connexion au chat @"+this.ipField.getText()+":"+this.portField.getText());
-            this.donneControleur().connecteCamix(this.ipField.getText(), this.portField.getText());
-        });
-
-        this.contenu.add(topLabel);
-        this.contenu.add(this.ipLabel);
-        this.contenu.add(this.ipField);
-        this.contenu.add(this.portLabel);
-        this.contenu.add(this.portField);
-        this.contenu.add(this.connectButton);
+        this.construirePanneaux();
+        this.construireControles(largeur, hauteur);
     }
 
-    public void setErrorMessage() {
-        this.topLabel.setText("Connexion au chat @"+this.ipField.getText()+":"+this.portField.getText() + " impossible");
+    /**
+     * Construire les panneaux de la fenêtre.
+     *
+     */
+    private void construirePanneaux()
+    {
+        this.contenu = this.fenetre.getContentPane();
+        this.contenu.setLayout(new FlowLayout());
+
+        this.panIPPort = new JPanel();
+        this.contenu.add(this.panIPPort);
+
+        this.panInformation = new JPanel();
+        this.contenu.add(this.panInformation);
+
+        this.panConnecter = new JPanel();
+        this.contenu.add(this.panConnecter);
+    }
+
+    /**
+     * Construire les widgets de contrôle de la fenêtre.
+     *
+     * @param largeur la largeur de la fenêtre.
+     * @param hauteur la hauteur de la fenêtre.
+     *
+     */
+    private void construireControles(Integer largeur, Integer hauteur)
+    {
+        final Integer mLargeur = Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_MARGE_LARGEUR"));
+        final Integer hInformation = Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_HAUTEUR_INFORMATION"));
+
+        /* Saisie de l'IP. */
+        this.texteIP = new JTextField(Felix.CONFIGURATION.getString("ADRESSE_CHAT"),
+                Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_TAILLE_SAISIE_IP")));
+        this.texteIP.setName(Felix.IHM.getString("FENETRE_CONNEXION_NOM_IP"));
+        this.texteIP.setEditable(true);
+        this.texteIP.requestFocus();
+        this.panIPPort.add(this.texteIP);
+
+        /* Saisie du port. */
+        this.textePort = new JFormattedTextField(NumberFormat.getIntegerInstance());
+        this.textePort.setName(Felix.IHM.getString("FENETRE_CONNEXION_NOM_PORT"));
+        this.textePort.setValue(Integer.parseInt(Felix.CONFIGURATION.getString("PORT_CHAT")));
+        this.textePort.setColumns(
+                Integer.parseInt(Felix.IHM.getString("FENETRE_CONNEXION_TAILLE_SAISIE_PORT")));
+        this.textePort.setEditable(true);
+        this.panIPPort.add(this.textePort);
+
+        /* Information de connexion. */
+        this.texteInformation = new JTextField(Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_DEFAUT"));
+        this.texteInformation.setName(Felix.IHM.getString("FENETRE_CONNEXION_NOM_INFORMATION"));
+        this.texteInformation.setPreferredSize(new Dimension(largeur - mLargeur, hInformation));
+        this.texteInformation.setHorizontalAlignment(JTextField.LEFT);
+        this.texteInformation.setEditable(false);
+        this.texteInformation.setFocusable(false);
+        this.panInformation.add(this.texteInformation);
+
+        /* Bouton de connexion */
+        this.boutonConnecter = new JButton(Felix.IHM.getString("FENETRE_CONNEXION_BOUTON_CONNECTER"));
+        this.boutonConnecter.setName(Felix.IHM.getString("FENETRE_CONNEXION_NOM_CONNEXION"));
+        this.boutonConnecter.addActionListener(this);
+        this.panConnecter.add(this.boutonConnecter);
+    }
+
+    /**
+     * Envoi d'un message au chat.
+     *
+     * @param ev un évènement d'action.
+     *
+     * @see java.awt.event.ActionListener
+     */
+    public void actionPerformed(ActionEvent ev)
+    {
+        try {
+            if (ev.getSource() == this.boutonConnecter) {
+
+                this.texteInformation.setText(String.format(
+                        Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
+                        this.texteIP.getText().trim(),
+                        ((Number) this.textePort.getValue()).toString()));
+
+                this.boutonConnecter.setEnabled(false);
+
+                /* Initiation de la connexion. */
+                new Thread(this).start();
+
+            } else {
+                /* Évènement inconnu. */
+                System.err.println("Réception d'un évènement inconnu sur la vue connexion.");
+            }
+        }
+        catch (NumberFormatException exception) {
+            /* Format invalide dans le champ du port. */
+            System.err.println("Format invalide dans le champ port de la vue connexion.");
+        }
+    }
+
+    /**
+     * Point d'entrée du thread de connexion au chat.
+     */
+    @Override
+    public void run()
+    {
+        try {
+            Thread.sleep(500);
+            this.donneControleur().connecteCamix(
+                    this.texteIP.getText().trim(), ((Number) this.textePort.getValue()).intValue());
+        }
+        catch (IOException | InterruptedException e) {
+            afficheConnexionImpossible();
+        }
+        finally {
+            this.boutonConnecter.setEnabled(true);
+        }
+    }
+
+    /**
+     * Affichage du message de connexion impossible.
+     *
+     */
+    private void afficheConnexionImpossible()
+    {
+        this.texteInformation.setText(
+                String.format(
+                        Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"),
+                        this.texteIP.getText().trim(),
+                        ((Number) this.textePort.getValue()).toString()));
     }
 
     /**

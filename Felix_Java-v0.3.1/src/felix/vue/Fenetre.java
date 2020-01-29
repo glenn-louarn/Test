@@ -31,7 +31,7 @@ public class Fenetre extends JFrame
 		super();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		setSize(largeur, hauteur);
 
 		setTitle(titre);

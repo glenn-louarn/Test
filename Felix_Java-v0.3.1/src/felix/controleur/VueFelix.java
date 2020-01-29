@@ -3,7 +3,7 @@ package felix.controleur;
 
 /**
  * Classe abstraite de vue contrôlée par un ControleurFelix (architecture MVC). 
- * 
+ *
  * @version 0.3.1
  * @author Matthias Brun
  *
@@ -25,10 +25,10 @@ public abstract class VueFelix
 	 *
 	 */
 	public VueFelix(ControleurFelix controleur)
-	{	
+	{
 		this.controleur = controleur;
 	}
-	
+
 	/**
 	 * Donne le contrôleur du programme.
 	 *
@@ -43,7 +43,7 @@ public abstract class VueFelix
 	/**
 	 * Afficher la fenêtre de la vue.
 	 *
-	 */ 	
+	 */
 	public abstract void affiche();
 
 	/**

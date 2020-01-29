@@ -22,12 +22,12 @@ import felix.controleur.VueFelix;
 
 /**
  * Classe de la vue chat de Felix.
- * 
+ *
  * Cette vue permet d'échanger des messages avec d'autres utilisateurs du chat.
- * 
+ *
  * Cette vue est une vue active : elle possède une méthode d'activation qui lance 
  * un thread de réception des messages du chat.
- * 
+ *
  * @version 0.3.1
  * @author Matthias Brun
  *
@@ -43,7 +43,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 	 * Le conteneur de la vue.
 	 */
 	private Container contenu;
-	
+
 	/**
 	 * Le panneau de la fenêtre pour saisir les messages.
 	 */
@@ -53,7 +53,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 	 * Le panneau de la fenêtre pour afficher les messages du chat.
 	 */
 	private JPanel panMessages;
-	
+
 	/**
 	 * Le champs de saisi des messages.
 	 */
@@ -78,27 +78,27 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 	 * Le style des messages du chat.
 	 */
 	private transient Style documentMessagesStyle;
-	
+
 	/**
 	 * Le nom du style des messages du chat.
 	 */
 	private static final String STYLENAME = "documentMessagesStyle";
-	
+
 	/**
 	 * Constructeur de la vue chat.
-	 * 
+	 *
 	 * @param controleur le contrôleur du chat auquel appartient la vue.
 	 */
-	public VueChat(ControleurFelix controleur) 
+	public VueChat(ControleurFelix controleur)
 	{
 		super(controleur);
-		
+
 		final Integer largeur = Integer.parseInt(Felix.IHM.getString("FENETRE_CHAT_LARGEUR"));
 		final Integer hauteur = Integer.parseInt(Felix.IHM.getString("FENETRE_CHAT_HAUTEUR"));
-		
+
 		this.fenetre = new Fenetre(largeur, hauteur, Felix.IHM.getString("FENETRE_CHAT_TITRE"));
-		
-		this.construireFenetre(largeur, hauteur);	
+
+		this.construireFenetre(largeur, hauteur);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 		this.construirePanneaux();
 		this.construireControles(largeur, hauteur);
 	}
-	
+
 	/**
 	 * Construire les panneaux de la fenêtre.
 	 *
@@ -131,7 +131,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 
 	/**
 	 * Construire les widgets de contrôle de la fenêtre.
-	 * 
+	 *
 	 * @param largeur la largeur de la fenêtre.
 	 * @param hauteur la hauteur de la fenêtre.
 	 *
@@ -152,7 +152,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 		this.texteSaisie.requestFocus();
 		this.texteSaisie.addActionListener(this);
 		this.panSaisie.add(this.texteSaisie);
-	
+
 		/* messages */
 		this.texteMessages = new JTextPane();
 		this.texteMessages.setName(Felix.IHM.getString("FENETRE_CHAT_NOM_MESSAGES"));
@@ -165,7 +165,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 
 		this.defilementMessages = new JScrollPane(this.texteMessages);
 		this.defilementMessages.setPreferredSize(new Dimension(largeur - mLargeur, hauteur - mHauteur));
-        	this.defilementMessages.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.defilementMessages.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		this.panMessages.add(this.defilementMessages);
 	}
@@ -187,7 +187,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 
 			// Efface le champs de saisi du message.
 			this.texteSaisie.setText("");
-		} 
+		}
 		catch (IOException ex) {
 			System.err.println("Écriture du message impossible.");
 			System.err.println(ex.getMessage());
@@ -198,7 +198,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 	 * Point d'entrée du thread de réception des messages du chat.
 	 */
 	@Override
-	public void run() 
+	public void run()
 	{
 		try {
 			while (true) {
@@ -207,9 +207,9 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 
 				// Écriture du message dans la zone des messages du chat (à la suite).
 				this.documentMessages.insertString(
-					this.documentMessages.getLength(),
-					message + System.getProperty("line.separator"), 
-					this.documentMessages.getStyle(STYLENAME)
+						this.documentMessages.getLength(),
+						message + System.getProperty("line.separator"),
+						this.documentMessages.getStyle(STYLENAME)
 				);
 
 				// Force l'affichage du dernier message reçu.
@@ -231,7 +231,7 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 			this.donneControleur().donneConnexion().ferme();
 		}
 	}
-	
+
 	/**
 	 * Activation de la réception des messages du chat.
 	 */
@@ -239,28 +239,28 @@ public class VueChat extends VueFelix implements ActionListener, Runnable
 	{
 		new Thread(this).start();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see felix.controleur.VueFelix
 	 */
 	@Override
-	public void affiche() 
+	public void affiche()
 	{
 		this.fenetre.setVisible(true);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see felix.controleur.VueFelix
 	 */
 	@Override
-	public void ferme() 
+	public void ferme()
 	{
 		this.fenetre.dispose();
 	}
 
-	
+
 }
