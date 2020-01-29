@@ -13,7 +13,7 @@ import org.netbeans.jemmy.TimeoutExpiredException;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
-import org.netbeans.jemmy.operators.JTextPaneOperator;
+import org.netbeans.jemmy.operators.JTextFieldOperator;
 import org.netbeans.jemmy.util.NameComponentChooser;
 
 
@@ -28,7 +28,7 @@ public class FelixTestSimple {
 
     private JTextFieldOperator textePort;
 
-    private JTextPaneOperator texteHeader;
+    private JTextFieldOperator texteInformation;
 
     @Before
     public void setUp() throws Exception {
@@ -40,7 +40,7 @@ public class FelixTestSimple {
         try {
             new ClassReference("felix.Felix").startApplication();
 
-            final Long timeoutObs = Long.valueOf(3000);
+            final Long timeoutObs = Long.valueOf(10000);
             Thread.sleep(timeoutObs);
         }
         catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException e) {
@@ -70,19 +70,19 @@ public class FelixTestSimple {
         try {
             // Accès au champ de saisie d'un identifiant produit (par son nom).
             this.texteIp = new JTextFieldOperator(this.fenetreConnexion,
-                    new NameComponentChooser(Felix.IHM.getString("CAISSE_NOM_SAISIE_ID_PRODUIT")));
+                    new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_IP")));
 
             // Accès au champ de saisie de la quantité de produit (par son nom).
             this.textePort = new JTextFieldOperator(this.fenetreConnexion,
-                    new NameComponentChooser(Felix.IHM.getString("CAISSE_NOM_SAISIE_QUANTITE_PRODUIT")));
+                    new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_PORT")));
 
             // Accès au champ de libellé d'un produit (par son nom).
-            this.texteHeader = new JTextPaneOperator(this.fenetreConnexion,
-                    new NameComponentChooser(Felix.IHM.getString("CAISSE_NOM_AFFICHAGE_LIBELLE_PRODUIT")));
+            this.texteInformation = new JTextFieldOperator(this.fenetreConnexion,
+                    new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_INFORMATION")));
 
             // Accès au bouton d'ajout d'un produit à la vente (par son nom).
             this.boutonConnexion = new JButtonOperator(this.fenetreConnexion,
-                    new NameComponentChooser(Felix.IHM.getString("CAISSE_NOM_BOUTON_AJOUTER")));
+                    new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_CONNEXION")));
         }
         catch (TimeoutExpiredException e) {
             Assert.fail("Problème d'accès à un composant de la vue connexion : " + e.getMessage());
@@ -100,112 +100,43 @@ public class FelixTestSimple {
     }
 
     @Test
-    public void testConnexionChat() throws InterruptedException
-    {
-        /**
-        // 1,5 seconde d'observation par suspension du thread
-        // entre chaque action (objectif pédagogique).
+    public void testConnexionChat() throws InterruptedException {
         final Long timeout = Long.valueOf(1500);
 
-        // Effacement du champ de saisie de l'ID du produit.
-        this.texteId.clickMouse();
-        this.texteId.clearText();
+        this.texteIp.clickMouse();
+        this.texteIp.clearText();
 
-        // Observation par suspension du thread (objectif pédagogique).
+        this.textePort.clickMouse();
+        this.textePort.clearText();
+
         Thread.sleep(timeout);
 
-        // Saisie de l'ID du produit.
-        this.texteId.typeText("11A");
-
-        // Forcer la perte de focus du champ de saisie de l'identifiant d'un produit
-        // en donnant le focus au champ de saisie de la quantité de produit.
-        this.texteQuantite.clickMouse();
-
-        // Validation des valeurs des champs libellé et prix du produit, normalement mis
-        // à jour après la perte de focus du champ de saisie de l'identifiant du produit.
-        final String libelleAttendu = "produit un A";
-        final String prixAttendu = String.format("%1$.2f €", 10.0);
+        final String texteDefaultAttendu = Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_DEFAUT");
 
         try {
-            // Attente du message du libellé.
-            this.texteLibelle.waitText(libelleAttendu);
+            this.texteInformation.waitText(texteDefaultAttendu);
+        } catch (TimeoutExpiredException e) {
+            Assert.fail("Information affichée invalide.");
         }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Libellé du produit (11A) invalide.");
-        }
+
+        this.boutonConnexion.clickMouse();
+
+        final String texteConnexionAttendu = String.format(
+                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"), "", "12345");;
 
         try {
-            // Attente du message du prix.
-            this.textePrix.waitText(prixAttendu);
-        }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Prix du produit (11A) invalide.");
+            this.texteInformation.waitText(texteConnexionAttendu);
+        } catch (TimeoutExpiredException e) {
+            Assert.fail("Information affichée invalide.");
         }
 
-        // Observation par suspension du thread (objectif pédagogique).
-        Thread.sleep(timeout);
-
-        // Effacement du champ de saisie de la quantité de produit.
-        this.texteQuantite.clearText();
-
-        // Observation par suspension du thread (objectif pédagogique).
-        Thread.sleep(timeout);
-
-        // Saisie de la quantité de produit
-        // Remarque : enterText est utilisé pour saisir et formatter la valeur saisie (JFormattedTextField).
-        this.texteQuantite.enterText("2");
-
-        // Observation par suspension du thread (objectif pédagogique).
-        Thread.sleep(timeout);
-
-        // Ajout du produit à la vente.
-        this.boutonAjouter.doClick();
-
-        // Validation des valeurs des champs libellé prix du produit ainsi que du ticket.
-        final String infoAttendu = String.format("+ produit un A   x   2  x %1$.2f €", 10.0);
-        final String totalAttendu = String.format("%1$.2f €", 20.0);
-        final String ticketAttendu = Monix.MESSAGES.getString("CLIENT_TEXTE_TICKET")
-                + System.getProperty("line.separator")
-                + String.format("produit un A       x 2      x    %1$.2f €", 10.0);
-        final String totalClientAttendu = String.format("%1$.2f €", 20.0);
+        final String texteErreurAttendu = String.format(
+                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"), "", "12345");
 
         try {
-            // Attente du message d'information de l'achat.
-            this.texteInfo.waitText(infoAttendu);
+            this.texteInformation.waitText(texteErreurAttendu);
+        } catch (TimeoutExpiredException e) {
+            Assert.fail("Information connexion invalide.");
         }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Information pour l'achat du produit (11A) invalide.");
-        }
-
-        try {
-            // Attente du message du prix de l'achat.
-            this.texteTotal.waitText(totalAttendu);
-        }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Prix total pour l'achat du produit (11A) invalide.");
-        }
-
-        try {
-            // Attente du ticket.
-            this.texteTicket.waitText(ticketAttendu);
-        }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Ticket pour l'achat du produit (11A) invalide.");
-        }
-
-        try {
-            // Attente du message du prix total de la vente.
-            this.texteTotalClient.waitText(totalClientAttendu);
-        }
-        catch (TimeoutExpiredException e) {
-            Assert.fail("Prix total pour la vente du produit (11A) invalide.");
-        }
-
-        // Observation par suspension du thread (objectif pédagogique).
-        Thread.sleep(timeout);
-
-        // Fin de la vente.
-        this.boutonFinVente.doClick();
-         **/
     }
 }
