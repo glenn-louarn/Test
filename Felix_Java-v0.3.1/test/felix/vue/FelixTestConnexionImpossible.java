@@ -16,7 +16,7 @@ import org.netbeans.jemmy.operators.JTextFieldOperator;
 import org.netbeans.jemmy.util.NameComponentChooser;
 
 
-public class FelixTestConnexionPossible {
+public class FelixTestConnexionImpossible {
 
     private JFrameOperator fenetreConnexion;
 
@@ -47,12 +47,10 @@ public class FelixTestConnexionPossible {
             throw e;
         }
 
-        // Accès à l'interface de Monix.
         this.accesInterface();
     }
 
     private void accesInterface() {
-        // Accès à l'interface de la vue caisse.
         this.accesVueConnexion();
     }
 
@@ -65,21 +63,16 @@ public class FelixTestConnexionPossible {
             Assert.fail("La fenêtre de la vue connexion n'est pas accessible : " + e.getMessage());
         }
 
-        // Accès aux composants (widgets) de la vue caisse
         try {
-            // Accès au champ de saisie d'un identifiant produit (par son nom).
             this.texteIp = new JTextFieldOperator(this.fenetreConnexion,
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_IP")));
 
-            // Accès au champ de saisie de la quantité de produit (par son nom).
             this.textePort = new JTextFieldOperator(this.fenetreConnexion,
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_PORT")));
 
-            // Accès au champ de libellé d'un produit (par son nom).
             this.texteInformation = new JTextFieldOperator(this.fenetreConnexion,
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_INFORMATION")));
 
-            // Accès au bouton d'ajout d'un produit à la vente (par son nom).
             this.boutonConnexion = new JButtonOperator(this.fenetreConnexion,
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_CONNEXION")));
         }

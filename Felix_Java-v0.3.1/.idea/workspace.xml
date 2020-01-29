@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2452a28b-cf9c-4144-969b-5a494c4551f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/felix/vue/FelixTestConnexionPossible.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/felix/vue/FelixTestSimple.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/felix/vue/FelixTestSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/felix/vue/FelixTestConnexionPossible.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/felix/vue/FelixTestConnexionPossible.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +24,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.FelixTestConnexionPossible">
+  <component name="RunManager" selected="Application.Felix">
     <configuration name="Felix" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="felix.Felix" />
       <module name="Felix_Java-v0.3.1" />
@@ -41,7 +38,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FelixTestConnexionPossible" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="FelixTestConnexionImpossible" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Felix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
@@ -50,13 +47,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="felix.vue" />
-      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionPossible" />
+      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionImpossible" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FelixTestConnexionPossible.testConnexionChat" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="FelixTestConnexionImpossible.testConnexionChat" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Felix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
@@ -65,14 +62,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="felix.vue" />
-      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionPossible" />
+      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionImpossible" />
       <option name="METHOD_NAME" value="testConnexionChat" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FelixTestConnexionPossible.testConnexionImpossibleIp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FelixTestConnexionImpossible.testConnexionImpossibleIp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Felix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
@@ -81,14 +78,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="felix.vue" />
-      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionPossible" />
+      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionImpossible" />
       <option name="METHOD_NAME" value="testConnexionImpossibleIp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FelixTestConnexionPossible.testConnexionImpossiblePort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FelixTestConnexionImpossible.testConnexionImpossiblePort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Felix_Java-v0.3.1" />
       <extension name="coverage">
         <pattern>
@@ -97,7 +94,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="felix.vue" />
-      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionPossible" />
+      <option name="MAIN_CLASS_NAME" value="felix.vue.FelixTestConnexionImpossible" />
       <option name="METHOD_NAME" value="testConnexionImpossiblePort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -106,8 +103,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FelixTestConnexionPossible.testConnexionImpossibleIp" />
-        <item itemvalue="JUnit.FelixTestConnexionPossible.testConnexionImpossiblePort" />
+        <item itemvalue="JUnit.FelixTestConnexionImpossible.testConnexionImpossibleIp" />
+        <item itemvalue="JUnit.FelixTestConnexionImpossible.testConnexionImpossiblePort" />
       </list>
     </recent_temporary>
   </component>
@@ -129,25 +126,25 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="451" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1580288674878" />
-    <state width="1807" height="236" key="GridCell.Tab.0.bottom" timestamp="1580290759052">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1807" height="236" key="GridCell.Tab.0.bottom" timestamp="1580292564988">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
     <state width="1807" height="236" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1580290759052" />
-    <state width="1807" height="236" key="GridCell.Tab.0.bottom/67.27.1853.923@67.27.1853.923" timestamp="1580284095189" />
-    <state width="1807" height="236" key="GridCell.Tab.0.center" timestamp="1580290759051">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1807" height="236" key="GridCell.Tab.0.bottom/67.27.1853.923@67.27.1853.923" timestamp="1580292564988" />
+    <state width="1807" height="236" key="GridCell.Tab.0.center" timestamp="1580292564987">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
     <state width="1807" height="236" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1580290759051" />
-    <state width="1807" height="236" key="GridCell.Tab.0.center/67.27.1853.923@67.27.1853.923" timestamp="1580284095188" />
-    <state width="1807" height="236" key="GridCell.Tab.0.left" timestamp="1580290759050">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1807" height="236" key="GridCell.Tab.0.center/67.27.1853.923@67.27.1853.923" timestamp="1580292564987" />
+    <state width="1807" height="236" key="GridCell.Tab.0.left" timestamp="1580292564986">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
     <state width="1807" height="236" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1580290759050" />
-    <state width="1807" height="236" key="GridCell.Tab.0.left/67.27.1853.923@67.27.1853.923" timestamp="1580284095186" />
-    <state width="1807" height="236" key="GridCell.Tab.0.right" timestamp="1580290759051">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1807" height="236" key="GridCell.Tab.0.left/67.27.1853.923@67.27.1853.923" timestamp="1580292564986" />
+    <state width="1807" height="236" key="GridCell.Tab.0.right" timestamp="1580292564988">
+      <screen x="67" y="27" width="1853" height="923" />
     </state>
     <state width="1807" height="236" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1580290759051" />
-    <state width="1807" height="236" key="GridCell.Tab.0.right/67.27.1853.923@67.27.1853.923" timestamp="1580284095189" />
+    <state width="1807" height="236" key="GridCell.Tab.0.right/67.27.1853.923@67.27.1853.923" timestamp="1580292564988" />
   </component>
 </project>
