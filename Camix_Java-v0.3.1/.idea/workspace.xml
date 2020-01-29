@@ -45,7 +45,7 @@
       <recent name="camix" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Camix Java">
+  <component name="RunManager" selected="JUnit.CanalChatTestEx1Mockito">
     <configuration name="Camix Java" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="camix.Camix" />
       <module name="Camix_Java-v0.3.1" />
@@ -65,6 +65,21 @@
       <option name="MAIN_CLASS_NAME" value="camix.service.CanalChatTestEx1EasyMock" />
       <option name="METHOD_NAME" value="ajouteClient" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CanalChatTestEx1Mockito" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Camix_Java-v0.3.1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="camix.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="camix.service" />
+      <option name="MAIN_CLASS_NAME" value="camix.service.CanalChatTestEx1Mockito" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,6 +117,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CanalChatTestEx1Mockito" />
         <item itemvalue="JUnit.ServiceChatEasyMock" />
         <item itemvalue="JUnit.CanalChatTestEx1Mockito.ajouteClient" />
         <item itemvalue="JUnit.CanalChatTestEx1EasyMock.ajouteClient" />

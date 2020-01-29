@@ -20,7 +20,6 @@ public class ServiceChatEasyMock {
     }
 
     /**
-
     @Test(timeout = 2000)
     public void testInformeDepartClient() throws IOException {
         final String clientSurnom = "surnom du client";
