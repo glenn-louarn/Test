@@ -16,7 +16,7 @@ import org.netbeans.jemmy.util.NameComponentChooser;
 import java.lang.reflect.InvocationTargetException;
 
 
-public class FelixTestConnexionPossible2 {
+public class FelixTestConnexionPossible {
 
     private JFrameOperator fenetreConnexion;
 
