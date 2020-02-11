@@ -16,22 +16,24 @@ import org.netbeans.jemmy.util.NameComponentChooser;
 import java.lang.reflect.InvocationTargetException;
 
 
-public class FelixTestConnexionPossible {
+public class FelixTestConnexionMultiPossible {
 
-    private JFrameOperator fenetreConnexion;
+    final int NB_INSTANCES = 2;
 
-    private JFrameOperator fenetreChat;
+    private JFrameOperator[] fenetreConnexion = new JFrameOperator[NB_INSTANCES];
 
-    private JTextFieldOperator textChatMessage;
+    private JFrameOperator[] fenetreChat = new JFrameOperator[NB_INSTANCES];
+
+    private JTextFieldOperator[] textChatMessage = new JTextFieldOperator[NB_INSTANCES];
 
     @SuppressWarnings("unused")
-    private JButtonOperator boutonConnexion;
+    private JButtonOperator[] boutonConnexion = new JButtonOperator[NB_INSTANCES];
 
-    private JTextFieldOperator texteIp;
+    private JTextFieldOperator[] texteIp = new JTextFieldOperator[NB_INSTANCES];
 
-    private JTextFieldOperator textePort;
+    private JTextFieldOperator[] textePort = new JTextFieldOperator[NB_INSTANCES];
 
-    private JTextFieldOperator texteInformation;
+    private JTextFieldOperator[] texteInformation = new JTextFieldOperator[NB_INSTANCES];
 
     @Before
     public void setUp() throws Exception {
@@ -50,32 +52,34 @@ public class FelixTestConnexionPossible {
             throw e;
         }
 
-        this.accesInterface();
+        this.accesInterfaces();
     }
 
-    private void accesInterface() {
-        this.accesVueConnexion();
+    private void accesInterfaces() {
+        for (int i = 0; i < this.NB_INSTANCES; i++) {
+            this.accesVueConnexion(i);
+        }
     }
 
-    private void accesVueConnexion() {
+    private void accesVueConnexion(int index) {
 
         try {
-            this.fenetreConnexion = new JFrameOperator(Felix.IHM.getString("FENETRE_CONNEXION_TITRE"));
+            this.fenetreConnexion[index] = new JFrameOperator(Felix.IHM.getString("FENETRE_CONNEXION_TITRE"));
         } catch (TimeoutExpiredException e) {
-            Assert.fail("La fenêtre de la vue connexion n'est pas accessible : " + e.getMessage());
+            Assert.fail("La fenêtre de la vue connexion  " + index + " est pas accessible : " + e.getMessage());
         }
 
         try {
-            this.texteIp = new JTextFieldOperator(this.fenetreConnexion,
+            this.texteIp[index] = new JTextFieldOperator(this.fenetreConnexion[index],
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_IP")));
 
-            this.textePort = new JTextFieldOperator(this.fenetreConnexion,
+            this.textePort[index] = new JTextFieldOperator(this.fenetreConnexion[index],
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_PORT")));
 
-            this.texteInformation = new JTextFieldOperator(this.fenetreConnexion,
+            this.texteInformation[index] = new JTextFieldOperator(this.fenetreConnexion[index],
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_INFORMATION")));
 
-            this.boutonConnexion = new JButtonOperator(this.fenetreConnexion,
+            this.boutonConnexion[index] = new JButtonOperator(this.fenetreConnexion[index],
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CONNEXION_NOM_CONNEXION")));
         } catch (TimeoutExpiredException e) {
             Assert.fail("Problème d'accès à un composant de la vue connexion : " + e.getMessage());
@@ -87,8 +91,8 @@ public class FelixTestConnexionPossible {
         final Long timeout = Long.valueOf(5000);
         Thread.sleep(timeout);
 
-        if (this.fenetreConnexion != null) {
-            this.fenetreConnexion.dispose();
+        if (this.fenetreConnexion[0] != null) {
+            this.fenetreConnexion[0].dispose();
         }
     }
 
@@ -98,36 +102,44 @@ public class FelixTestConnexionPossible {
 
         Thread.sleep(timeout);
 
-        this.boutonConnexion.clickMouse();
+        this.boutonConnexion[0].clickMouse();
+
+        this.boutonConnexion[1].clickMouse();
 
         final String texteConnexionAttendu = String.format(
                 Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"), Felix.CONFIGURATION.getString("ADRESSE_CHAT"), "12345");
         ;
 
         try {
-            this.texteInformation.waitText(texteConnexionAttendu);
-            Assert.assertEquals(texteConnexionAttendu, this.texteInformation.getDisplayedText());
+            this.texteInformation[0].waitText(texteConnexionAttendu);
+            this.texteInformation[1].waitText(texteConnexionAttendu);
+            Assert.assertEquals(texteConnexionAttendu, this.texteInformation[0].getDisplayedText());
         } catch (TimeoutExpiredException e) {
         }
 
-        try{
-            this.fenetreConnexion.waitClosed();
-            Assert.assertFalse( this.fenetreConnexion.isVisible());
+        try {
+            this.fenetreConnexion[0].waitClosed();
+            Assert.assertFalse(this.fenetreConnexion[0].isVisible());
+            this.fenetreConnexion[1].waitClosed();
+            Assert.assertFalse(this.fenetreConnexion[1].isVisible());
         } catch (Exception e) {
             e.printStackTrace();
         }
         Thread.sleep(timeout);
         try {
-            this.fenetreChat = new JFrameOperator(Felix.IHM.getString("FENETRE_CHAT_TITRE"));
-            Assert.assertTrue(this.fenetreChat.isVisible());
+            this.fenetreChat[0] = new JFrameOperator(Felix.IHM.getString("FENETRE_CHAT_TITRE"));
+            Assert.assertTrue(this.fenetreChat[0].isVisible());
+            this.fenetreChat[1] = new JFrameOperator(Felix.IHM.getString("FENETRE_CHAT_TITRE"));
+            Assert.assertTrue(this.fenetreChat[1].isVisible());
         } catch (TimeoutExpiredException e) {
             Assert.fail("La fenêtre de la vue chat n'est pas accessible : " + e.getMessage());
         }
 
         try {
-            this.textChatMessage = new JTextFieldOperator(this.fenetreChat,
+            this.textChatMessage[0] = new JTextFieldOperator(this.fenetreChat[0],
                     new NameComponentChooser(Felix.IHM.getString("FENETRE_CHAT_NOM_SAISIE")));
-            this.textChatMessage.setText("Bonjour/n");
+            this.textChatMessage[1] = new JTextFieldOperator(this.fenetreChat[1],
+                    new NameComponentChooser(Felix.IHM.getString("FENETRE_CHAT_NOM_SAISIE")));
         } catch (TimeoutExpiredException e) {
             Assert.fail("Problème d'accès à un composant de la vue connexion : " + e.getMessage());
         }

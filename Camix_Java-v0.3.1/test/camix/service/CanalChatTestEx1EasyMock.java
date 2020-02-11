@@ -3,6 +3,9 @@ package camix.service;
 import org.easymock.*;
 import org.junit.*;
 
+import java.lang.reflect.Field;
+import java.util.Hashtable;
+
 public class CanalChatTestEx1EasyMock {
 
     @Mock
@@ -14,64 +17,28 @@ public class CanalChatTestEx1EasyMock {
     @Before
     public void setup() throws Exception{
         this.clientMock = EasyMock.createMock(ClientChat.class);
-        this.canalChat = new CanalChat("Canal testé");
+        this.canalChat = EasyMock.partialMockBuilder(CanalChat.class).addMockedMethod("estPresent").withConstructor("test").createMock();
     }
-
     @Test
-    public void ajouteClient() {
-        final String id = "id client";
+    public void testAjoutClientNonPresent() throws Exception {
+        final String id = "1";
 
-        final int repetitions = 5;
+        EasyMock.expect(this.canalChat.estPresent(this.clientMock)).andReturn(true);
+        EasyMock.expect(this.clientMock.donneId()).andReturn(id).times(1);
 
-        EasyMock.expect(
-                this.clientMock.donneId()
-        ).andReturn(
-               id
-        );
+        EasyMock.replay(canalChat);
+        EasyMock.replay(clientMock);
+        // Pour l'accès au field caché (privé)
+        String attributConcerne = "clients";
+        Field attribut;
 
-        EasyMock.expectLastCall().times(repetitions);
-
-        EasyMock.replay(this.clientMock);
-
-        this.canalChat.ajouteClient(this.clientMock);
-
-        Assert.assertEquals("Nombre de clients incompatible", 1, (int) canalChat.donneNombreClients());
-        Assert.assertTrue("Le client n'est pas dans le canal", canalChat.estPresent(this.clientMock));
-
-        this.canalChat.ajouteClient(this.clientMock);
-
-        Assert.assertEquals("Nombre de clients incompatible", 1, (int) canalChat.donneNombreClients());
-        Assert.assertTrue("Le client n'est pas dans le canal", canalChat.estPresent(this.clientMock));
-
+        attribut = CanalChat.class.getDeclaredField(attributConcerne);
+        attribut.setAccessible(true);
+        Hashtable<String, ClientChat> table = (Hashtable<String, ClientChat>) attribut.get(this.canalChat);
+        table.put(clientMock.donneId(), clientMock);
+        Assert.assertEquals(1, table.size());
+        Assert.assertTrue(table.contains(this.clientMock));
         EasyMock.verify(this.clientMock);
     }
 
-    @Test
-    public void ajouteClientSideEffect() {
-        final String id = "id client";
-
-        final int repetitions = 5;
-
-        EasyMock.expect(
-                this.clientMock.donneId()
-        ).andReturn(
-                id
-        );
-
-        EasyMock.expectLastCall().times(repetitions);
-
-        EasyMock.replay(this.clientMock);
-
-        this.canalChat.ajouteClient(this.clientMock);
-
-        Assert.assertEquals("Nombre de clients incompatible", 1, (int) canalChat.donneNombreClients());
-        Assert.assertTrue("Le client n'est pas dans le canal", canalChat.estPresent(this.clientMock));
-
-        this.canalChat.ajouteClient(this.clientMock);
-
-        Assert.assertEquals("Nombre de clients incompatible", 1, (int) canalChat.donneNombreClients());
-        Assert.assertTrue("Le client n'est pas dans le canal", canalChat.estPresent(this.clientMock));
-
-        EasyMock.verify(this.clientMock);
-    }
  }
