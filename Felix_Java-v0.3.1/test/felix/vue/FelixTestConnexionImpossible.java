@@ -31,7 +31,7 @@ public class FelixTestConnexionImpossible {
 
     @Before
     public void setUp() throws Exception {
-        final Integer timeout = 500;
+        final Integer timeout = 3000;
         JemmyProperties.setCurrentTimeout("FrameWaiter.WaitFrameTimeout", timeout);
         JemmyProperties.setCurrentTimeout("ComponentOperator.WaitComponentTimeout", timeout);
         JemmyProperties.setCurrentTimeout("ComponentOperator.WaitStateTimeout", timeout);
@@ -39,7 +39,7 @@ public class FelixTestConnexionImpossible {
         try {
             new ClassReference("felix.Felix").startApplication();
 
-            final Long timeoutObs = Long.valueOf(500);
+            final Long timeoutObs = Long.valueOf(3000);
             Thread.sleep(timeoutObs);
         }
         catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException e) {
@@ -83,7 +83,7 @@ public class FelixTestConnexionImpossible {
 
     @After
     public void tearDown() throws Exception {
-        final Long timeout = Long.valueOf(500);
+        final Long timeout = Long.valueOf(3000);
         Thread.sleep(timeout);
 
         if (this.fenetreConnexion != null) {
@@ -113,22 +113,11 @@ public class FelixTestConnexionImpossible {
         } catch (TimeoutExpiredException e) {
             Assert.fail("Information affichée invalide.");
         }
-
-        final String texteErreurAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"),
-                Felix.CONFIGURATION.getString("ADRESSE_CHAT"),
-                Felix.CONFIGURATION.getString("PORT_CHAT"));
-
-        try {
-            this.texteInformation.waitText(texteErreurAttendu);
-        } catch (TimeoutExpiredException e) {
-            Assert.fail("Information connexion invalide.");
-        }
     }
 
     @Test
     public void testConnexionImpossibleIp() throws InterruptedException {
-        final Long timeout = Long.valueOf(500);
+        final Long timeout = Long.valueOf(1000);
 
         Thread.sleep(timeout);
 
@@ -150,34 +139,24 @@ public class FelixTestConnexionImpossible {
 
         this.boutonConnexion.clickMouse();
 
-        Thread.sleep(timeout);
-
-        final String texteConnexionAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
-                newIp,
-                Felix.CONFIGURATION.getString("PORT_CHAT"));
-
-        try {
-            this.texteInformation.waitText(texteConnexionAttendu);
-        } catch (TimeoutExpiredException e) {
-            Assert.fail("Information affichée invalide.");
-        }
+        Thread.sleep(Long.valueOf(3000));
 
         final String texteErreurAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"),
+                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
                 newIp,
                 Felix.CONFIGURATION.getString("PORT_CHAT"));
 
         try {
             this.texteInformation.waitText(texteErreurAttendu);
         } catch (TimeoutExpiredException e) {
-            Assert.fail("Information connexion invalide.");
+            Assert.fail("Information affichée invalide.");
         }
+
     }
 
     @Test
     public void testConnexionImpossiblePort() throws InterruptedException {
-        final Long timeout = Long.valueOf(500);
+        final Long timeout = Long.valueOf(1000);
 
         Thread.sleep(timeout);
 
@@ -199,33 +178,24 @@ public class FelixTestConnexionImpossible {
 
         this.boutonConnexion.clickMouse();
 
-        Thread.sleep(timeout);
+        Thread.sleep(Long.valueOf(3000));
 
-        final String texteConnexionAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
+        final String texteErreurAttendu = String.format(
+                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"),
                 Felix.CONFIGURATION.getString("ADRESSE_CHAT"),
                 newPort);
 
         try {
-            this.texteInformation.waitText(texteConnexionAttendu);
+            this.texteInformation.waitText(texteErreurAttendu);
         } catch (TimeoutExpiredException e) {
             Assert.fail("Information affichée invalide.");
         }
 
-        final String texteErreurAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
-                Felix.CONFIGURATION.getString("ADRESSE_CHAT"),
-                newPort);
-        try {
-            this.texteInformation.waitText(texteErreurAttendu);
-        } catch (TimeoutExpiredException e) {
-            Assert.fail("Information connexion invalide.");
-        }
     }
 
     @Test
     public void testConnexionImpossibleIpAndPort() throws InterruptedException {
-        final Long timeout = Long.valueOf(500);
+        final Long timeout = Long.valueOf(1000);
 
         Thread.sleep(timeout);
 
@@ -254,28 +224,18 @@ public class FelixTestConnexionImpossible {
 
         this.boutonConnexion.clickMouse();
 
-        Thread.sleep(timeout);
-
-        final String texteConnexionAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
-                newIp,
-                newPort);
-
-        try {
-            this.texteInformation.waitText(texteConnexionAttendu);
-        } catch (TimeoutExpiredException e) {
-            Assert.fail("Information affichée invalide.");
-        }
+        Thread.sleep(Long.valueOf(20000));
 
         final String texteErreurAttendu = String.format(
-                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION"),
+                Felix.IHM.getString("FENETRE_CONNEXION_MESSAGE_CONNEXION_IMPOSSIBLE"),
                 newIp,
                 newPort);
 
         try {
             this.texteInformation.waitText(texteErreurAttendu);
         } catch (TimeoutExpiredException e) {
-            Assert.fail("Information connexion invalide.");
+            Assert.fail("Information affichée invalide.");
         }
+
     }
 }
